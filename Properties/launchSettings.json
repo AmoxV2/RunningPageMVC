@@ -1,0 +1,24 @@
+{
+  "profiles": {
+    "Learning_MVC": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "https://localhost:7159;http://localhost:5124"
+    },
+    "IIS": {
+      "commandName": "IISExpress"
+    }
+  },
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:1228",
+      "sslPort": 44309
+    }
+  }
+}
