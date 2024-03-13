@@ -1,6 +1,8 @@
 using Learning_MVC.Data;
-using Learning_MVC.Data.Interfaces;
+using Learning_MVC.Helpers;
+using Learning_MVC.Interfaces;
 using Learning_MVC.Repository;
+using Learning_MVC.Services;
 using Microsoft.EntityFrameworkCore;
 
 internal class Program
@@ -13,6 +15,9 @@ internal class Program
         builder.Services.AddControllersWithViews();
         builder.Services.AddScoped<IClubRepository, ClubRepository>();
         builder.Services.AddScoped<IRaceRepository, RaceRepository>();
+        builder.Services.AddScoped<IPhotoService, PhotoService>();
+        builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
+
         builder.Services.AddDbContext<ApplicationDB>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));

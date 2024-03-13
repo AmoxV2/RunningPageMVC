@@ -1,6 +1,6 @@
 ﻿using Learning_MVC.Models;
 
-namespace Learning_MVC.Data.Interfaces
+namespace Learning_MVC.Interfaces
 {
     public interface IRaceRepository
     {

@@ -1,5 +1,5 @@
 ﻿using Learning_MVC.Data;
-using Learning_MVC.Data.Interfaces;
+using Learning_MVC.Interfaces;
 using Learning_MVC.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
