@@ -26,15 +26,19 @@ namespace Learning_MVC.Repository
             return Save();
         }
 
-        public async  Task<IEnumerable<Club>> GetAll()
+        public async Task<IEnumerable<Club>> GetAll()
         {
             return await _context.Clubs.ToListAsync();
         }
 
         public async Task<Club> GetByIdAsync(int id)
         {
-            return await _context.Clubs.Include(i => i.Address).FirstOrDefaultAsync(c => c.Id == id);
-        } 
+            return await _context.Clubs.Include(i => i.Address).FirstOrDefaultAsync(i => i.Id == id);
+        }
+        public async Task<Club> GetByIdAsyncNoTracking(int id)
+        {
+            return await _context.Clubs.Include(i => i.Address).AsNoTracking().FirstOrDefaultAsync(c => c.Id == id);
+        }
 
 
         public async Task<IEnumerable<Club>> GetClubByCity(string city)
