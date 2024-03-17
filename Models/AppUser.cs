@@ -11,7 +11,7 @@ namespace Learning_MVC.Models
         public int? Mileage { get; set; }
 
         [ForeignKey("Address")]
-        public int AddressId { get; set; }
+        public int? AddressId { get; set; }
 
         public Address? Address { get; set; }
                
