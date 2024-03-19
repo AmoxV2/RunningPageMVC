@@ -12,5 +12,6 @@ namespace Learning_MVC.ViewModels
         public Address Address { get; set; }
         public IFormFile Image { get; set; }
         public RaceCategory RaceCategory { get; set; }
+        public string AppUserId { get; set; }
     }
 }

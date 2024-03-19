@@ -6,7 +6,7 @@
 
 <div class="album py-5 bg-light">
     <div class="container">
-        <h2 class="display-4 fw-normal">Your races</h2>
+        <h2 class="display-4 fw-normal">Your Races</h2>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
             @foreach (var item in Model.Races)
@@ -21,10 +21,12 @@
                                 <div class="btn-group">
                                     <a type="btn btn-success" asp-controller="Club" asp-action="Detail" asp-route-id="@item.Id"
                                        class="btn btn-sm btn-outline-secondary">View</a>
-                                    
+                                    @if(User.Identity.IsAuthenticated)
+                                    {
                                         <a asp-controller="Race" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
                                         <a asp-controller="Race" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Delete</a>
-                                    
+                                    }
+
                                 </div>
                                 <small class="text-muted">@item.RaceCategory</small>
                             </div>
@@ -47,9 +49,12 @@
                                 <div class="btn-group">
                                     <a type="btn btn-success" asp-controller="Club" asp-action="Detail" asp-route-id="@item.Id"
                                        class="btn btn-sm btn-outline-secondary">View</a>
-                                    
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
                                         <a asp-controller="Club" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
                                         <a asp-controller="Club" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Delete</a>
+                                    }
+                                       
                                     
                                 </div>
                                 <small class="text-muted">@item.ClubCategory</small>
