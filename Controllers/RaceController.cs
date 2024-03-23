@@ -132,6 +132,28 @@ namespace Learning_MVC.Controllers
                 return View(raceVM);
             }
         }
+        public async Task<IActionResult> Delete(int id)
+        {
+            var raceDetail = await _raceRepository.GetByIdAsync(id);
+            if (raceDetail == null)
+            {
+                return View("Error");
+            }
+            return View(raceDetail);
+        }
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteRace(int id)
+        {
+            var raceDetail = await _raceRepository.GetByIdAsync(id);
+            if (raceDetail == null)
+            {
+                return View("Error");
+            }
+
+            _raceRepository.Delete(raceDetail);
+            return RedirectToAction("Index");
+
+        }
 
     }
 }
