@@ -70,14 +70,11 @@ namespace Learning_MVC.Controllers
 
             return View(clubVM);
         }
-        public async Task<IActionResult> Edit (int id)
+        public async Task<IActionResult> Edit(int id)
         {
             var club = await _clubRepository.GetByIdAsync(id);
-            if(club== null)
-            {
-                return View("Error");
-            }
-            var clubVm = new EditClubViewModel
+            if (club == null) return View("Error");
+            var clubVM = new EditClubViewModel
             {
                 Title = club.Title,
                 Description = club.Description,
@@ -85,30 +82,29 @@ namespace Learning_MVC.Controllers
                 Address = club.Address,
                 URL = club.Image,
                 ClubCategory = club.ClubCategory
-
-            }; 
-            return View (clubVm);
+            };
+            return View(clubVM);
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(int id , EditClubViewModel clubVM)
+        public async Task<IActionResult> Edit(int id, EditClubViewModel clubVM)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                ModelState.AddModelError("", "Failed to edit club ");
-                return View("Edit", clubVM);    
+                ModelState.AddModelError("", "Failed to edit club");
+                return View("Edit", clubVM);
             }
-            var userClub= await _clubRepository.GetByIdAsyncNoTracking(id);
+
+            var userClub = await _clubRepository.GetByIdAsyncNoTracking(id);
 
             if (userClub != null)
             {
-
                 try
                 {
                     await _photoService.DeletePhotoAsync(userClub.Image);
                 }
                 catch (Exception ex)
                 {
-                    ModelState.AddModelError("", "Could not   delete photo");
+                    ModelState.AddModelError("", "Could not delete photo");
                     return View(clubVM);
                 }
                 var photoResult = await _photoService.AddPhotoAsync(clubVM.Image);
@@ -121,10 +117,10 @@ namespace Learning_MVC.Controllers
                     Image = photoResult.Url.ToString(),
                     AddressId = clubVM.AddressId,
                     Address = clubVM.Address,
-                    ClubCategory = clubVM.ClubCategory
                 };
 
                 _clubRepository.Update(club);
+
                 return RedirectToAction("Index");
             }
             else
@@ -133,27 +129,22 @@ namespace Learning_MVC.Controllers
             }
         }
 
+
         public async Task<IActionResult> Delete(int id)
         {
-            var clubDetail = await _clubRepository.GetByIdAsync(id);
-            if (clubDetail == null)
-            {
-                return View("Error");
-            }
-            return View(clubDetail);
+            var clubDetails = await _clubRepository.GetByIdAsync(id);
+            if (clubDetails == null) return View("Error");
+            return View(clubDetails);
         }
-        [HttpPost,ActionName("Delete")]
+
+        [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteClub(int id)
         {
-            var clubDetail = await _clubRepository.GetByIdAsync(id);
-            if (clubDetail == null)
-            {
-                return View("Error");
-            }
-            
-            _clubRepository.Delete(clubDetail);
-            return RedirectToAction("Index");
+            var clubDetails = await _clubRepository.GetByIdAsync(id);
+            if (clubDetails == null) return View("Error");
 
+            _clubRepository.Delete(clubDetails);
+            return RedirectToAction("Index");
         }
     }
 }
